@@ -1,0 +1,37 @@
+﻿@using Microsoft.Extensions.Logging
+@using PassportCheckpoint.Interface
+
+@implements IDisposable
+@inject IPassportStateProvider prvPassportState
+
+@inject ILogger<PassportState> logPassportState;
+
+<CascadingValue TValue="System.Threading.Tasks.Task<PassportState>" Name="@CascadingParameterName.PassportState" Value="@tskPassportState" ChildContent="@ChildContent" />
+
+@code {
+    private Task<PassportState>? tskPassportState;
+
+    [Parameter]
+    public required RenderFragment ChildContent { get; init; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        prvPassportState.PassportStateChanged += OnPassportStateChanged;
+    }
+
+    private void OnPassportStateChanged(object? oSender, PassportStateEventArgs argsPassportState)
+    {
+        _ = InvokeAsync(() =>
+        {
+            tskPassportState = argsPassportState.PassportState;
+            StateHasChanged();
+        });
+    }
+
+    void IDisposable.Dispose()
+    {
+        prvPassportState.PassportStateChanged -= OnPassportStateChanged;
+    }
+}
