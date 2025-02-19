@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using PassportCheckpoint.Interface;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PassportCheckpoint
 {
@@ -62,8 +64,11 @@ namespace PassportCheckpoint
             if (ppState.IsAuthenticated == false)
                 return false;
 
-            if (RequiredVisa.Count() == 0)
-                return true;
+            using (IEnumerator<IPassportVisa> enumEnumerator = RequiredVisa.GetEnumerator())
+            {
+                if (enumEnumerator.MoveNext() == false)
+                    return true;
+            };
 
             bool bIsAuthorized = false;
 

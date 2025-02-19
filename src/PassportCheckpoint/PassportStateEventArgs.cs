@@ -1,4 +1,7 @@
-﻿namespace PassportCheckpoint
+﻿using System;
+using System.Threading.Tasks;
+
+namespace PassportCheckpoint
 {
     public sealed class PassportStateEventArgs : EventArgs
     {

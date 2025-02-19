@@ -1,4 +1,7 @@
-﻿namespace PassportCheckpoint.Interface
+﻿using System;
+using System.Collections.Generic;
+
+namespace PassportCheckpoint.Interface
 {
     public interface IPassport
     {

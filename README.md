@@ -1,3 +1,3 @@
 # PassportCheckpoint
 
-A client-side implementation of [Passport](https://github.com/Hlyrnir/Passport) for Blazor WebAssembly.
+Component to add a checkpoint for [Passport](https://github.com/Hlyrnir/Passport) to a Blazor WebAssembly.
